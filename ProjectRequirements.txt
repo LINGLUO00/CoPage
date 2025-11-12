@@ -1,0 +1,421 @@
+                 多人在线编辑软件
+一、软件简介
+多人在线协作编辑软件是一款专为团队协作设计，支持多人同时在线编辑文档、表格和演示文稿。
+以下为该软件的核心功能
+1. 用户管理模块
+1.1 用户注册与登录
+	支持邮箱/手机号注册
+	密码找回与重置
+1.2 用户信息管理
+	个人资料编辑
+	头像上传与设置
+	联系信息管理
+1.3 用户权限管理
+	角色定义（管理员、编辑者、查看者）
+	权限分配
+	访问控制列表（ACL）
+	操作日志记录
+2. 文档管理模块
+2.1 文档创建与编辑
+	富文本编辑器
+	Markdown支持(选做)
+	模板库
+	自动保存与恢复
+2.2 文档版本控制（选做）
+	版本历史记录
+	版本对比
+	版本回滚
+	版本锁定
+2.3 文档分类与搜索
+	多种方式展示文档列表，如按文件夹/标签分类
+	全文搜索
+	高级搜索（按作者、日期、关键词等）
+	搜索结果排序
+2.4 文档导入与导出（选做）
+	支持多种格式（Word、PDF、Markdown等）
+	批量导入/导出
+3. 实时协作模块
+3.1 实时编辑与同步
+	多用户同时编辑
+	实时光标位置显示
+3.2 评论与批注
+	行内评论
+	批注功能
+	回复与@提及
+	评论通知
+3.3 任务分配与跟踪
+	任务创建与分配
+	任务状态跟踪
+	截止日期设置
+	任务完成通知
+4. 通知与通讯模块
+4.1 通知系统
+	实时通知（编辑、评论、任务等）
+	通知分类与过滤
+	通知设置
+	通知历史记录
+4.2 实时通讯
+	内置聊天功能
+	视频会议集成
+	屏幕共享
+	文件共享
+5. 移动端支持模块（选做）
+5.1 响应式设计
+	适应不同屏幕尺寸
+	移动端优化操作
+	离线编辑与同步
+5.2 移动端功能
+	文档创建与编辑
+	实时协作
+	通知与通讯
+	文档搜索与分类
+6. 系统管理模块
+6.1 系统监控（选做）
+	实时性能监控
+	错误日志记录
+	报警机制
+	系统健康报告
+6.2 用户管理
+	用户列表管理
+	用户权限调整
+	用户行为分析
+	用户满意度调查
+6.3 系统配置（选做）
+	系统参数设置
+	功能模块开关
+
+
+
+二、开发技术
+不限系统架构，可以使用各类开发框架，数据库使用postgresql
+
+
+:
+CoPage/
+│
+├── client/                                    # Tauri 桌面客户端
+│   ├── src/                                   # Vue3 前端源码
+│   │   ├── assets/                            # 静态资源
+│   │   │   ├── styles/
+│   │   │   │   ├── main.css
+│   │   │   │   ├── variables.css             # CSS 变量
+│   │   │   │   ├── frosted-glass.css         # 毛玻璃效果
+│   │   │   │   └── themes/
+│   │   │   │       ├── light.css
+│   │   │   │       └── dark.css
+│   │   │   ├── images/
+│   │   │   │   ├── logo.svg
+│   │   │   │   ├── backgrounds/
+│   │   │   │   └── illustrations/
+│   │   │   ├── icons/
+│   │   │   │   └── .svg
+│   │   │   └── fonts/
+│   │   │       └── custom-fonts.woff2
+│   │   │
+│   │   ├── components/                        # Vue 组件
+│   │   │   ├── layout/                        # 布局组件
+│   │   │   │   ├── AppLayout.vue
+│   │   │   │   ├── TopBar.vue
+│   │   │   │   ├── SideBar.vue
+│   │   │   │   └── FloatingTrigger.vue
+│   │   │   ├── editor/                        # 编辑器组件
+│   │   │   │   ├── RichEditor.vue             # 富文本编辑器
+│   │   │   │   ├── Toolbar.vue                # 工具栏
+│   │   │   │   ├── CollaborativeCursor.vue    # 协作光标
+│   │   │   │   └── CommentThread.vue          # 评论线程
+│   │   │   ├── document/                      # 文档组件
+│   │   │   │   ├── DocumentCard.vue
+│   │   │   │   ├── DocumentTree.vue
+│   │   │   │   ├── VersionHistory.vue
+│   │   │   │   └── ShareDialog.vue
+│   │   │   ├── chat/                          # 聊天组件
+│   │   │   │   ├── ChatPanel.vue
+│   │   │   │   ├── MessageBubble.vue
+│   │   │   │   └── UserTyping.vue
+│   │   │   ├── user/                          # 用户组件
+│   │   │   │   ├── UserAvatar.vue
+│   │   │   │   ├── OnlineUsers.vue
+│   │   │   │   └── UserProfile.vue
+│   │   │   └── common/                        # 通用组件
+│   │   │       ├── Button.vue
+│   │   │       ├── Input.vue
+│   │   │       ├── Modal.vue
+│   │   │       ├── Loading.vue
+│   │   │       └── Toast.vue
+│   │   │
+│   │   ├── views/                             # 页面视图
+│   │   │   ├── auth/
+│   │   │   │   ├── LoginView.vue              # 登录页
+│   │   │   │   ├── RegisterView.vue           # 注册页
+│   │   │   │   └── ForgotPasswordView.vue     # 忘记密码
+│   │   │   ├── document/
+│   │   │   │   ├── DocumentListView.vue       # 文档列表
+│   │   │   │   ├── DocumentDetailView.vue     # 文档详情
+│   │   │   │   └── DocumentSearchView.vue     # 文档搜索
+│   │   │   ├── editor/
+│   │   │   │   └── EditorView.vue             # 编辑器页面
+│   │   │   ├── settings/
+│   │   │   │   ├── SettingsView.vue           # 设置主页
+│   │   │   │   ├── ProfileSettings.vue        # 个人资料
+│   │   │   │   ├── AppearanceSettings.vue     # 外观设置
+│   │   │   │   └── LayoutSettings.vue         # 布局设置
+│   │   │   └── home/
+│   │   │       └── HomeView.vue               # 主页/欢迎页
+│   │   │
+│   │   ├── stores/                            # Pinia 状态管理
+│   │   │   ├── index.ts                       # Store 统一导出
+│   │   │   ├── auth.ts                        # 认证状态
+│   │   │   ├── user.ts                        # 用户状态
+│   │   │   ├── document.ts                    # 文档状态
+│   │   │   ├── editor.ts                      # 编辑器状态
+│   │   │   ├── collaboration.ts               # 协作状态
+│   │   │   ├── chat.ts                        # 聊天状态
+│   │   │   ├── layout.ts                      # 布局状态
+│   │   │   └── notification.ts                # 通知状态
+│   │   │
+│   │   ├── composables/                       # 组合式函数（Hooks）
+│   │   │   ├── useAuth.ts                     # 认证相关
+│   │   │   ├── useWebSocket.ts                # WebSocket 连接
+│   │   │   ├── useCollaboration.ts            # 实时协作
+│   │   │   ├── useKeyboardShortcuts.ts        # 快捷键
+│   │   │   ├── useLocalStorage.ts             # 本地存储
+│   │   │   └── useTheme.ts                    # 主题切换
+│   │   │
+│   │   ├── services/                          # 服务层
+│   │   │   ├── api/                           # HTTP API 调用
+│   │   │   │   ├── index.ts                   # Axios 配置
+│   │   │   │   ├── auth.api.ts                # 认证 API
+│   │   │   │   ├── user.api.ts                # 用户 API
+│   │   │   │   ├── document.api.ts            # 文档 API
+│   │   │   │   └── chat.api.ts                # 聊天 API
+│   │   │   ├── websocket/                     # WebSocket 服务
+│   │   │   │   ├── index.ts                   # WebSocket 管理
+│   │   │   │   ├── collaboration.ws.ts        # 协作 WebSocket
+│   │   │   │   └── chat.ws.ts                 # 聊天 WebSocket
+│   │   │   └── tauri/                         # Tauri 本地功能
+│   │   │       ├── index.ts
+│   │   │       ├── file.ts                    # 文件操作
+│   │   │       ├── dialog.ts                  # 对话框
+│   │   │       └── window.ts                  # 窗口管理
+│   │   │
+│   │   ├── types/                             # TypeScript 类型定义
+│   │   │   ├── index.ts
+│   │   │   ├── user.ts
+│   │   │   ├── document.ts
+│   │   │   ├── editor.ts
+│   │   │   ├── chat.ts
+│   │   │   └── api.ts
+│   │   │
+│   │   ├── utils/                             # 工具函数
+│   │   │   ├── format.ts                      # 格式化
+│   │   │   ├── validation.ts                  # 验证
+│   │   │   ├── date.ts                        # 日期处理
+│   │   │   └── crypto.ts                      # 加密/解密
+│   │   │
+│   │   ├── router/                            # Vue Router
+│   │   │   ├── index.ts                       # 路由配置
+│   │   │   ├── guards.ts                      # 路由守卫
+│   │   │   └── routes/
+│   │   │       ├── auth.ts
+│   │   │       ├── document.ts
+│   │   │       └── editor.ts
+│   │   │
+│   │   ├── plugins/                           # Vue 插件
+│   │   │   ├── primevue.ts                    # PrimeVue 配置
+│   │   │   └── i18n.ts                        # 国际化
+│   │   │
+│   │   ├── App.vue                            # 根组件
+│   │   ├── main.ts                            # 入口文件
+│   │   └── env.d.ts                           # 环境变量类型
+│   │
+│   ├── src-tauri/                             # Tauri 后端（Rust）
+│   │   ├── src/
+│   │   │   ├── main.rs                        # Tauri 主入口
+│   │   │   ├── commands/                      # Tauri 命令
+│   │   │   │   ├── mod.rs
+│   │   │   │   ├── file.rs                    # 文件系统操作
+│   │   │   │   ├── window.rs                  # 窗口管理
+│   │   │   │   └── system.rs                  # 系统集成
+│   │   │   ├── menu.rs                        # 应用菜单
+│   │   │   ├── tray.rs                        # 系统托盘
+│   │   │   └── utils.rs                       # 工具函数
+│   │   ├── icons/                             # 应用图标
+│   │   │   ├── 32x32.png
+│   │   │   ├── 128x128.png
+│   │   │   ├── icon.icns                      # macOS
+│   │   │   ├── icon.ico                       # Windows
+│   │   │   └── icon.png                       # Linux
+│   │   ├── Cargo.toml                         # Rust 依赖
+│   │   ├── tauri.conf.json                    # Tauri 配置
+│   │   └── build.rs                           # 构建脚本
+│   │
+│   ├── public/                                # 公共静态资源
+│   │   ├── favicon.ico
+│   │   └── robots.txt
+│   │
+│   ├── index.html                             # HTML 入口
+│   ├── package.json                           # Node.js 依赖
+│   ├── pnpm-lock.yaml
+│   ├── tsconfig.json                          # TypeScript 配置
+│   ├── tsconfig.node.json
+│   ├── vite.config.ts                         # Vite 配置
+│   ├── .env.development                       # 开发环境变量
+│   ├── .env.production                        # 生产环境变量
+│   └── README.md
+│
+├── server/                                    # Rust 后端服务器
+│   ├── src/
+│   │   ├── main.rs                            # 服务器入口
+│   │   │
+│   │   ├── config/                            # 配置管理
+│   │   │   ├── mod.rs
+│   │   │   ├── database.rs                    # 数据库配置
+│   │   │   ├── redis.rs                       # Redis 配置
+│   │   │   └── app.rs                         # 应用配置
+│   │   │
+│   │   ├── routes/                            # HTTP 路由
+│   │   │   ├── mod.rs
+│   │   │   ├── auth.rs                        # /api/auth/
+│   │   │   ├── users.rs                       # /api/users/*
+│   │   │   ├── documents.rs                   # /api/documents/*
+│   │   │   ├── chat.rs                        # /api/chat/*
+│   │   │   └── health.rs                      # /api/health
+│   │   │
+│   │   ├── handlers/                          # 请求处理器
+│   │   │   ├── mod.rs
+│   │   │   ├── auth.rs                        # 认证处理
+│   │   │   ├── user.rs                        # 用户处理
+│   │   │   ├── document.rs                    # 文档处理
+│   │   │   └── chat.rs                        # 聊天处理
+│   │   │
+│   │   ├── services/                          # 业务逻辑层
+│   │   │   ├── mod.rs
+│   │   │   ├── auth_service.rs                # 认证服务
+│   │   │   ├── user_service.rs                # 用户服务
+│   │   │   ├── document_service.rs            # 文档服务
+│   │   │   ├── collaboration_service.rs       # 协作服务
+│   │   │   └── chat_service.rs                # 聊天服务
+│   │   │
+│   │   ├── repositories/                      # 数据访问层
+│   │   │   ├── mod.rs
+│   │   │   ├── user_repo.rs                   # 用户数据操作
+│   │   │   ├── document_repo.rs               # 文档数据操作
+│   │   │   └── chat_repo.rs                   # 聊天数据操作
+│   │   │
+│   │   ├── models/                            # 数据模型
+│   │   │   ├── mod.rs
+│   │   │   ├── user.rs                        # User 结构体
+│   │   │   ├── document.rs                    # Document 结构体
+│   │   │   ├── message.rs                     # Message 结构体
+│   │   │   └── collaboration.rs               # Collaboration 结构体
+│   │   │
+│   │   ├── dto/                               # 数据传输对象
+│   │   │   ├── mod.rs
+│   │   │   ├── auth_dto.rs                    # 认证 DTO
+│   │   │   ├── user_dto.rs                    # 用户 DTO
+│   │   │   └── document_dto.rs                # 文档 DTO
+│   │   │
+│   │   ├── websocket/                         # WebSocket 处理
+│   │   │   ├── mod.rs
+│   │   │   ├── manager.rs                     # WebSocket 连接管理
+│   │   │   ├── collaboration.rs               # 协作 WebSocket
+│   │   │   └── chat.rs                        # 聊天 WebSocket
+│   │   │
+│   │   ├── middleware/                        # 中间件
+│   │   │   ├── mod.rs
+│   │   │   ├── auth.rs                        # JWT 认证中间件
+│   │   │   ├── cors.rs                        # CORS 中间件
+│   │   │   ├── logging.rs                     # 日志中间件
+│   │   │   └── rate_limit.rs                  # 限流中间件
+│   │   │
+│   │   ├── database/                          # 数据库管理
+│   │   │   ├── mod.rs
+│   │   │   ├── pool.rs                        # 连接池
+│   │   │   └── migrations.rs                  # 迁移管理
+│   │   │
+│   │   ├── cache/                             # 缓存管理
+│   │   │   ├── mod.rs
+│   │   │   └── redis.rs                       # Redis 缓存
+│   │   │
+│   │   ├── utils/                             # 工具函数
+│   │   │   ├── mod.rs
+│   │   │   ├── jwt.rs                         # JWT 工具
+│   │   │   ├── password.rs                    # 密码加密
+│   │   │   ├── validation.rs                  # 数据验证
+│   │   │   └── time.rs                        # 时间处理
+│   │   │
+│   │   ├── errors/                            # 错误处理
+│   │   │   ├── mod.rs
+│   │   │   └── app_error.rs                   # 自定义错误
+│   │   │
+│   │   └── tests/                             # 测试
+│   │       ├── integration/
+│   │       └── unit/
+│   │
+│   ├── migrations/                            # SQL 数据库迁移
+│   │   ├── 20240101_create_users.sql
+│   │   ├── 20240102_create_documents.sql
+│   │   ├── 20240103_create_messages.sql
+│   │   └── 20240104_create_collaborations.sql
+│   │
+│   ├── Cargo.toml                             # Rust 依赖配置
+│   ├── .env.example                           # 环境变量示例
+│   ├── config.toml                            # 应用配置
+│   └── README.md
+│
+├── shared/                                    # 前后端共享代码
+│   ├── types/                                 # 共享类型定义
+│   │   ├── user.rs                            # Rust 类型
+│   │   ├── user.ts                            # TypeScript 类型
+│   │   ├── document.rs
+│   │   ├── document.ts
+│   │   └── api.ts
+│   └── constants/                             # 共享常量
+│       ├── status_codes.rs
+│       └── status_codes.ts
+│
+├── docs/                                      # 项目文档
+│   ├── README.md
+│   ├── architecture/                          # 架构设计
+│   │   ├── overview.md
+│   │   ├── database-schema.md
+│   │   └── api-design.md
+│   ├── api/                                   # API 文档
+│   │   ├── authentication.md
+│   │   ├── documents.md
+│   │   └── websocket.md
+│   ├── deployment/                            # 部署文档
+│   │   ├── server-setup.md
+│   │   └── client-build.md
+│   └── development/                           # 开发文档
+│       ├── getting-started.md
+│       ├── coding-standards.md
+│       └── testing.md
+│
+├── scripts/                                   # 脚本
+│   ├── setup.sh                               # 项目初始化
+│   ├── dev.sh                                 # 启动开发环境
+│   ├── build.sh                               # 构建所有项目
+│   ├── deploy.sh                              # 部署脚本
+│   └── db/
+│       ├── migrate.sh                         # 数据库迁移
+│       └── seed.sh                            # 种子数据
+│
+├── .github/                                   # GitHub 配置
+│   ├── workflows/
+│   │   ├── client-ci.yml                      # 客户端 CI
+│   │   ├── server-ci.yml                      # 服务器 CI
+│   │   └── release.yml                        # 发布工作流
+│   └── ISSUE_TEMPLATE/
+│
+├── docker/                                    # Docker 配置（开发用）
+│   ├── docker-compose.yml                     # 开发环境
+│   ├── postgres/
+│   │   └── init.sql
+│   └── redis/
+│
+├── .gitignore                                 # Git 忽略文件
+├── .editorconfig                              # 编辑器配置
+├── README.md                                  # 项目说明
+├── LICENSE                                    # 许可证
+└── CHANGELOG.md                               # 更新日志

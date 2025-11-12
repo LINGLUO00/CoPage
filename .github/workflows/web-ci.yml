@@ -1,0 +1,30 @@
+name: Web CI
+on:
+  push:
+    paths:
+      - "apps/web/**"
+      - "shared/**"
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "shared/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@4
+      - uses: pnpm/action-setup@v2
+      - name: Install dependencies
+        run: |
+          cd apps/web
+          pnpm install
+      - name: Build
+        run: |
+          cd apps/web
+          pnpm build
+      - name: Test
+        run: |
+          cd apps/web
+          pnpm test
+

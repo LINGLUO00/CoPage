@@ -1,0 +1,33 @@
+:root {
+  /* 毛玻璃效果变量 */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-blur: blur(40px);
+  
+  /* 暗色模式毛玻璃 */
+  --glass-bg-dark: rgba(30, 30, 30, 0.3);
+  --glass-border-dark: rgba(255, 255, 255, 0.3);
+  
+  /* 布局尺寸 */
+  --topbar-height: 48px;
+  --sidebar-width: 64px;
+  --middle-panel-width: 280px;
+  
+  /* 颜色 */
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --text-color: #2c3e50;
+  --text-secondary: #6c757d;
+  --border-color: rgba(255,255,255,0.2);
+  --hover-bg: rgba(102, 126, 234, 0.1);
+}
+
+.dark-mode {
+  --glass-bg: var(--glass-bg-dark);
+  --glass-border: var(--glass-border-dark);
+  --text-color: #e1e4e8;
+  --text-secondary: #8b949e;
+  --border-color: #30363d;
+  --hover-bg: rgba(118, 75, 162, 0.2);
+}
